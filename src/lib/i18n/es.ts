@@ -1,6 +1,6 @@
 export const es = {
   siteTitle: 'daysoff — calculadora de puentes vacacionales',
-  heading: 'daysoff',
+  heading: 'DaysOff',
   tagline:
     'Encuentra la combinación óptima de días de vacaciones para maximizar tu tiempo libre consecutivo.',
 
