@@ -1,6 +1,9 @@
 import { es } from './es';
+import { en } from './en';
+import type { Strings } from './es';
 
-// Only one locale for now — this indirection is what lets us add more
-// (e.g. `en`) later without touching call sites.
-export const t = es;
-export type Strings = typeof es;
+export type { Strings };
+export type Locale = 'es' | 'en';
+
+export const locales: Record<Locale, Strings> = { es, en };
+export const defaultLocale: Locale = 'es';

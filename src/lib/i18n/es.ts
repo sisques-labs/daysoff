@@ -17,6 +17,7 @@ export const es = {
     combinedPlanSummary: (ptoUsed: number, totalDaysOff: number) =>
       `${ptoUsed} ${ptoUsed === 1 ? 'día' : 'días'} de vacaciones → ${totalDaysOff} ${totalDaysOff === 1 ? 'día libre' : 'días libres'}`,
     individualHeading: 'Puentes individuales',
+    topPick: 'Mejor opción',
     ptoUsed: (n: number) =>
       `${n} ${n === 1 ? 'día de vacaciones' : 'días de vacaciones'}`,
     totalDaysOff: (n: number) =>
@@ -25,7 +26,10 @@ export const es = {
   },
 
   calendar: {
-    heading: 'Calendario del mejor resultado',
+    heading: 'Calendario',
+    previousMonth: 'Mes anterior',
+    nextMonth: 'Mes siguiente',
+    weekdays: ['L', 'M', 'X', 'J', 'V', 'S', 'D'] as string[],
     legend: {
       holiday: 'Festivo',
       weekend: 'Fin de semana',
@@ -33,4 +37,15 @@ export const es = {
       pto: 'Vacaciones sugeridas',
     },
   },
+
+  theme: {
+    switchToLight: 'Cambiar a tema claro',
+    switchToDark: 'Cambiar a tema oscuro',
+  },
+
+  language: {
+    switcherLabel: 'Idioma',
+  },
 };
+
+export type Strings = typeof es;
