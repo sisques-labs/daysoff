@@ -235,6 +235,39 @@ export default function Calculator() {
         </label>
       </section>
 
+      {topResult && (
+        <section className="rounded-lg border border-slate-200 p-6">
+          <h2 className="text-lg font-semibold text-slate-800">
+            {t.calendar.heading}
+          </h2>
+          <div className="mt-4 grid gap-6 sm:grid-cols-2">
+            {topMonths.map(({ year: y, month }) => (
+              <MonthGrid
+                key={`${y}-${month}`}
+                year={y}
+                month={month}
+                calendarByDate={calendarByDate}
+                ptoDates={ptoDates}
+              />
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-3 text-xs text-slate-600">
+            <span className={`rounded px-2 py-1 ${dayClass('holiday')}`}>
+              {t.calendar.legend.holiday}
+            </span>
+            <span className={`rounded px-2 py-1 ${dayClass('weekend')}`}>
+              {t.calendar.legend.weekend}
+            </span>
+            <span className={`rounded px-2 py-1 ${dayClass('pto')}`}>
+              {t.calendar.legend.pto}
+            </span>
+            <span className={`rounded px-2 py-1 ${dayClass('workday')}`}>
+              {t.calendar.legend.workday}
+            </span>
+          </div>
+        </section>
+      )}
+
       <section className="rounded-lg border border-slate-200 p-6">
         <h2 className="text-lg font-semibold text-slate-800">
           {t.results.heading}
@@ -276,39 +309,6 @@ export default function Calculator() {
           </>
         )}
       </section>
-
-      {topResult && (
-        <section className="rounded-lg border border-slate-200 p-6">
-          <h2 className="text-lg font-semibold text-slate-800">
-            {t.calendar.heading}
-          </h2>
-          <div className="mt-4 grid gap-6 sm:grid-cols-2">
-            {topMonths.map(({ year: y, month }) => (
-              <MonthGrid
-                key={`${y}-${month}`}
-                year={y}
-                month={month}
-                calendarByDate={calendarByDate}
-                ptoDates={ptoDates}
-              />
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-3 text-xs text-slate-600">
-            <span className={`rounded px-2 py-1 ${dayClass('holiday')}`}>
-              {t.calendar.legend.holiday}
-            </span>
-            <span className={`rounded px-2 py-1 ${dayClass('weekend')}`}>
-              {t.calendar.legend.weekend}
-            </span>
-            <span className={`rounded px-2 py-1 ${dayClass('pto')}`}>
-              {t.calendar.legend.pto}
-            </span>
-            <span className={`rounded px-2 py-1 ${dayClass('workday')}`}>
-              {t.calendar.legend.workday}
-            </span>
-          </div>
-        </section>
-      )}
     </div>
   );
 }
