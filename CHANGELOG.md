@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.0] - 2026-08-04
+
+### Features
+- Highlight calendar when selecting a bridge from the results list (e6a5cf0)
+- Redesign header logo and fix header alignment (b85a82e)
 ## [0.2.0] - 2026-08-04
 
 ### Bug Fixes
