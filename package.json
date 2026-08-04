@@ -1,6 +1,6 @@
 {
-  "name": "sisques-labs/daysoff",
-  "version": "0.1.0",
+  "name": "sisqueslabs/daysoff",
+  "version": "0.0.0",
   "description": "Vacation bridge calculator — find the optimal combination of PTO days to maximize consecutive time off by leveraging public holidays and weekends.",
   "author": "Sisques Labs",
   "repository": {
