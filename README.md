@@ -27,7 +27,7 @@ Node version is pinned in `.nvmrc` (22). Package manager is pnpm, pinned via the
 
 - `src/pages/index.astro` — main page, renders the calculator island
 - `src/components/Calculator.tsx` — the interactive React island (`client:load`)
-- `src/lib/holidays/` — static JSON holiday data, one file per country/region/year
+- `src/lib/holidays/` — static JSON holiday data, one file per country/year (`es-2026.json`); `registry.ts` resolves a region into a merged, ranked `Holiday[]`
 - `src/lib/optimizer.ts` — pure TypeScript module with the calendar/bridge-finding logic
 - `src/lib/optimizer.spec.ts` — unit tests for the optimizer (Vitest)
 
@@ -39,7 +39,7 @@ Node version is pinned in `.nvmrc` (22). Package manager is pnpm, pinned via the
 
 The `Calculator` island wires this up: a region/year/available-days form drives the calculation, the ranked list shows individual bridges plus the greedy combined plan, and a month-grid calendar highlights holidays, weekends, and the suggested PTO days for the top result.
 
-Holiday data (national + all 17 autonomous communities, 2026) lives in `src/lib/holidays/es-<region>-2026.json`, generated from the [`date-holidays`](https://www.npmjs.com/package/date-holidays) npm package rather than typed by hand — cross-checked against several regions (Madrid, Cataluña, País Vasco, Galicia) against known official dates. Still, verify against the official BOE calendar before relying on this data in production. Local/municipal holidays are explicitly out of scope.
+Holiday data (national + all 17 autonomous communities, 2026) lives in a single `src/lib/holidays/es-2026.json`: `national` holidays are listed once, and each entry under `regions` only carries the delta it adds on top — its own regional days, plus substitute days for a national holiday that region observes (moving a holiday off a Sunday is a per-region decision, not a national one). `registry.ts` merges `national + regions[slug].holidays` into the flat, sorted `Holiday[]` the rest of the app consumes. This mirrors how the [`date-holidays`](https://www.npmjs.com/package/date-holidays) npm package — used to generate this data rather than typing it by hand — structures its own per-country data file. Cross-checked against several regions (Madrid, Cataluña, País Vasco, Galicia) against known official dates, but still verify against the official BOE calendar before relying on this data in production. Local/municipal holidays are explicitly out of scope.
 
 ## Git hooks (Husky)
 

@@ -1,8 +1,7 @@
 {
   "country": "ES",
-  "region": "national",
   "year": 2026,
-  "holidays": [
+  "national": [
     { "date": "2026-01-01", "name": "Año Nuevo", "scope": "national" },
     { "date": "2026-01-06", "name": "Día de los Reyes Magos", "scope": "national" },
     { "date": "2026-04-03", "name": "Viernes Santo", "scope": "national" },
@@ -13,5 +12,157 @@
     { "date": "2026-12-06", "name": "Día de la Constitución Española", "scope": "national" },
     { "date": "2026-12-08", "name": "La inmaculada concepción", "scope": "national" },
     { "date": "2026-12-25", "name": "Navidad", "scope": "national" }
-  ]
+  ],
+  "regions": {
+    "andalucia": {
+      "label": "Andalucía",
+      "holidays": [
+        { "date": "2026-02-28", "name": "Día de Andalucía", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "aragon": {
+      "label": "Aragón",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-23", "name": "Día de Aragón", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "asturias": {
+      "label": "Asturias",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-09-08", "name": "Día de Asturias", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "islas-baleares": {
+      "label": "Islas Baleares",
+      "holidays": [
+        { "date": "2026-03-01", "name": "Día de les Illes Balears", "scope": "regional" },
+        { "date": "2026-03-02", "name": "Día de les Illes Balears (día sustituto)", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" }
+      ]
+    },
+    "canarias": {
+      "label": "Canarias",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-05-30", "name": "Día de Canarias", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" }
+      ]
+    },
+    "cantabria": {
+      "label": "Cantabria",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-06-28", "name": "Día de las Instituciones de Cantabria", "scope": "regional" },
+        { "date": "2026-09-15", "name": "La Bien Aparecida", "scope": "regional" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "castilla-la-mancha": {
+      "label": "Castilla-La Mancha",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-05-31", "name": "Día de Castilla-La Mancha", "scope": "regional" },
+        { "date": "2026-06-04", "name": "Corpus Christi", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" }
+      ]
+    },
+    "castilla-y-leon": {
+      "label": "Castilla y León",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-23", "name": "Fiesta de Castilla y León", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "cataluna": {
+      "label": "Cataluña",
+      "holidays": [
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" },
+        { "date": "2026-06-24", "name": "San Juan", "scope": "regional" },
+        { "date": "2026-09-11", "name": "Dia de Cataluña", "scope": "regional" },
+        { "date": "2026-12-26", "name": "San Esteban", "scope": "regional" }
+      ]
+    },
+    "comunidad-valenciana": {
+      "label": "Comunidad Valenciana",
+      "holidays": [
+        { "date": "2026-03-19", "name": "San José", "scope": "regional" },
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" },
+        { "date": "2026-06-24", "name": "San Juan", "scope": "regional" }
+      ]
+    },
+    "extremadura": {
+      "label": "Extremadura",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-09-08", "name": "Día de Extremadura", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "galicia": {
+      "label": "Galicia",
+      "holidays": [
+        { "date": "2026-03-19", "name": "San José", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-05-17", "name": "Día de las Letras Gallegas", "scope": "regional" },
+        { "date": "2026-07-25", "name": "Día Nacional de Galicia", "scope": "regional" }
+      ]
+    },
+    "madrid": {
+      "label": "Madrid",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-05-02", "name": "Día de la Comunidad de Madrid", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "murcia": {
+      "label": "Murcia",
+      "holidays": [
+        { "date": "2026-03-19", "name": "San José", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    },
+    "navarra": {
+      "label": "Navarra",
+      "holidays": [
+        { "date": "2026-03-19", "name": "San José", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" },
+        { "date": "2026-11-02", "name": "Todos los Santos (día sustituto)", "scope": "national" }
+      ]
+    },
+    "pais-vasco": {
+      "label": "País Vasco",
+      "holidays": [
+        { "date": "2026-03-19", "name": "San José", "scope": "regional" },
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" },
+        { "date": "2026-07-25", "name": "Santiago Apóstol", "scope": "regional" }
+      ]
+    },
+    "la-rioja": {
+      "label": "La Rioja",
+      "holidays": [
+        { "date": "2026-04-02", "name": "Jueves Santo", "scope": "regional" },
+        { "date": "2026-04-06", "name": "Lunes de Pascua", "scope": "regional" },
+        { "date": "2026-06-09", "name": "Día de La Rioja", "scope": "regional" },
+        { "date": "2026-12-07", "name": "Día de la Constitución Española (día sustituto)", "scope": "national" }
+      ]
+    }
+  }
 }
