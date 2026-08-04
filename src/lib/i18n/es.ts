@@ -29,6 +29,7 @@ export const es = {
     heading: 'Calendario',
     previousMonth: 'Mes anterior',
     nextMonth: 'Mes siguiente',
+    weekdays: ['L', 'M', 'X', 'J', 'V', 'S', 'D'] as string[],
     legend: {
       holiday: 'Festivo',
       weekend: 'Fin de semana',
@@ -36,4 +37,15 @@ export const es = {
       pto: 'Vacaciones sugeridas',
     },
   },
+
+  theme: {
+    switchToLight: 'Cambiar a tema claro',
+    switchToDark: 'Cambiar a tema oscuro',
+  },
+
+  language: {
+    switcherLabel: 'Idioma',
+  },
 };
+
+export type Strings = typeof es;
