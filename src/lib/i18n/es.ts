@@ -17,6 +17,7 @@ export const es = {
     combinedPlanSummary: (ptoUsed: number, totalDaysOff: number) =>
       `${ptoUsed} ${ptoUsed === 1 ? 'día' : 'días'} de vacaciones → ${totalDaysOff} ${totalDaysOff === 1 ? 'día libre' : 'días libres'}`,
     individualHeading: 'Puentes individuales',
+    topPick: 'Mejor opción',
     ptoUsed: (n: number) =>
       `${n} ${n === 1 ? 'día de vacaciones' : 'días de vacaciones'}`,
     totalDaysOff: (n: number) =>
