@@ -116,7 +116,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SunriseIcon() {
+function LogoIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -127,10 +127,18 @@ function SunriseIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M12 3v7" />
-      <circle cx="12" cy="14" r="3.5" fill="currentColor" stroke="none" />
-      <path d="M4 19h16" />
-      <path d="m7.5 16.5 1.5-1.5M16.5 16.5 15 15" />
+      <path d="M8 3v3.5M16 3v3.5" />
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M3.5 9.75h17" />
+      <rect
+        x="13"
+        y="12.25"
+        width="4.5"
+        height="4.5"
+        rx="1"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }
@@ -426,10 +434,10 @@ export default function Calculator() {
 
   return (
     <div className="space-y-10">
-      <header className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
+      <header className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/30 dark:shadow-amber-500/20">
-            <SunriseIcon />
+            <LogoIcon />
           </div>
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-50">
