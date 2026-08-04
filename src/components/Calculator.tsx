@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { locales, defaultLocale } from '../lib/i18n';
 import type { Locale, Strings } from '../lib/i18n';
 import { regions, years, getHolidayCalendar } from '../lib/holidays/registry';
@@ -116,7 +116,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SunriseIcon() {
+function LogoIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -127,10 +127,18 @@ function SunriseIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M12 3v7" />
-      <circle cx="12" cy="14" r="3.5" fill="currentColor" stroke="none" />
-      <path d="M4 19h16" />
-      <path d="m7.5 16.5 1.5-1.5M16.5 16.5 15 15" />
+      <path d="M8 3v3.5M16 3v3.5" />
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M3.5 9.75h17" />
+      <rect
+        x="13"
+        y="12.25"
+        width="4.5"
+        height="4.5"
+        rx="1"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }
@@ -246,37 +254,52 @@ function BridgeRow({
   bridge,
   rank,
   isTop,
+  isSelected,
+  onSelect,
   t,
   formatters,
 }: {
   bridge: BridgeCandidate;
   rank: number;
   isTop: boolean;
+  isSelected: boolean;
+  onSelect: () => void;
   t: Strings;
   formatters: Formatters;
 }) {
   return (
-    <li className="group flex items-center gap-4 rounded-xl px-3 py-3 transition hover:bg-stone-50 dark:hover:bg-stone-800/60">
-      <span className="w-8 shrink-0 text-center text-lg font-bold tabular-nums text-stone-200 transition group-hover:text-amber-400 dark:text-stone-700">
-        {String(rank).padStart(2, '0')}
-      </span>
-      <div className="min-w-0 flex-1">
-        <p className="flex flex-wrap items-center gap-2 font-medium text-stone-800 dark:text-stone-100">
-          {formatRange(bridge.startDate, bridge.endDate, formatters)}
-          {isTop && (
-            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700 dark:bg-amber-400/10 dark:text-amber-300">
-              {t.results.topPick}
-            </span>
-          )}
-        </p>
-        <p className="text-sm text-stone-500 dark:text-stone-400">
-          {t.results.ptoUsed(bridge.ptoUsed)} →{' '}
-          {t.results.totalDaysOff(bridge.totalDaysOff)}
-        </p>
-      </div>
-      <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/20">
-        {t.results.efficiency(bridge.efficiency)}
-      </span>
+    <li>
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={isSelected}
+        className={`group flex w-full items-center gap-4 rounded-xl px-3 py-3 text-left transition hover:bg-stone-50 dark:hover:bg-stone-800/60 ${
+          isSelected
+            ? 'bg-amber-50 ring-1 ring-inset ring-amber-300 dark:bg-amber-400/10 dark:ring-amber-400/30'
+            : ''
+        }`}
+      >
+        <span className="w-8 shrink-0 text-center text-lg font-bold tabular-nums text-stone-200 transition group-hover:text-amber-400 dark:text-stone-700">
+          {String(rank).padStart(2, '0')}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="flex flex-wrap items-center gap-2 font-medium text-stone-800 dark:text-stone-100">
+            {formatRange(bridge.startDate, bridge.endDate, formatters)}
+            {isTop && (
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700 dark:bg-amber-400/10 dark:text-amber-300">
+                {t.results.topPick}
+              </span>
+            )}
+          </p>
+          <p className="text-sm text-stone-500 dark:text-stone-400">
+            {t.results.ptoUsed(bridge.ptoUsed)} →{' '}
+            {t.results.totalDaysOff(bridge.totalDaysOff)}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/20">
+          {t.results.efficiency(bridge.efficiency)}
+        </span>
+      </button>
     </li>
   );
 }
@@ -348,37 +371,73 @@ export default function Calculator() {
   );
   const topResult = candidates[0];
 
+  // Which bridge is currently highlighted on the calendar. Defaults to the
+  // top recommendation; clicking a row in either list overrides it.
+  const [selectedStartDate, setSelectedStartDate] = useState<
+    string | undefined
+  >(undefined);
+
+  const selectedBridge = useMemo(() => {
+    if (selectedStartDate) {
+      const fromCandidates = candidates.find(
+        (b) => b.startDate === selectedStartDate,
+      );
+      if (fromCandidates) return fromCandidates;
+      const fromPlan = combinedPlan.bridges.find(
+        (b) => b.startDate === selectedStartDate,
+      );
+      if (fromPlan) return fromPlan;
+    }
+    return topResult;
+  }, [selectedStartDate, candidates, combinedPlan, topResult]);
+
+  // The candidate list is rebuilt from scratch whenever the inputs change,
+  // so a stale selection should fall back to the new top pick rather than
+  // silently pointing at a bridge that no longer exists.
+  useEffect(() => {
+    setSelectedStartDate(undefined);
+  }, [region, year, availableDays]);
+
   const ptoDates = useMemo(() => {
-    if (!topResult) return new Set<string>();
+    if (!selectedBridge) return new Set<string>();
     const dates = new Set<string>();
     for (const day of calendar) {
       if (
-        day.date >= topResult.startDate &&
-        day.date <= topResult.endDate &&
+        day.date >= selectedBridge.startDate &&
+        day.date <= selectedBridge.endDate &&
         day.type === 'workday'
       ) {
         dates.add(day.date);
       }
     }
     return dates;
-  }, [calendar, topResult]);
+  }, [calendar, selectedBridge]);
 
   const [viewMonth, setViewMonth] = useState(() => new Date().getUTCMonth());
-  const topStartDate = topResult?.startDate;
+  const calendarSectionRef = useRef<HTMLElement>(null);
+  const selectedStart = selectedBridge?.startDate;
 
-  // Jump the calendar to the top recommendation whenever it changes, but
-  // leave it alone otherwise so browsing with the arrows isn't reset on
-  // every render.
+  // Jump the calendar to whichever bridge is selected (top recommendation
+  // by default) whenever it changes, but leave it alone otherwise so
+  // browsing with the arrows isn't reset on every render.
   useEffect(() => {
-    if (topStartDate) setViewMonth(parseDate(topStartDate).getUTCMonth());
-  }, [topStartDate]);
+    if (selectedStart) setViewMonth(parseDate(selectedStart).getUTCMonth());
+  }, [selectedStart]);
+
+  function selectBridge(bridge: BridgeCandidate) {
+    setSelectedStartDate(bridge.startDate);
+    calendarSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
 
   return (
     <div className="space-y-10">
-      <header className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
+      <header className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/30 dark:shadow-amber-500/20">
-            <SunriseIcon />
+            <LogoIcon />
           </div>
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-50">
@@ -460,7 +519,10 @@ export default function Calculator() {
       </section>
 
       <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 dark:border-stone-800 dark:bg-stone-900">
+        <section
+          ref={calendarSectionRef}
+          className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm lg:sticky lg:top-6 dark:border-stone-800 dark:bg-stone-900"
+        >
           <div className="flex items-center justify-between gap-2">
             <SectionHeading>{t.calendar.heading}</SectionHeading>
             <MonthNav
@@ -513,11 +575,24 @@ export default function Calculator() {
                   <ul className="mt-2 space-y-1 text-sm text-emerald-800 dark:text-emerald-300">
                     {combinedPlan.bridges.map((bridge) => (
                       <li key={bridge.startDate}>
-                        {formatRange(
-                          bridge.startDate,
-                          bridge.endDate,
-                          formatters,
-                        )}
+                        <button
+                          type="button"
+                          onClick={() => selectBridge(bridge)}
+                          aria-pressed={
+                            selectedBridge?.startDate === bridge.startDate
+                          }
+                          className={`w-full rounded-lg px-2 py-1 text-left transition hover:bg-emerald-100/70 dark:hover:bg-emerald-400/10 ${
+                            selectedBridge?.startDate === bridge.startDate
+                              ? 'bg-emerald-100 font-semibold dark:bg-emerald-400/20'
+                              : ''
+                          }`}
+                        >
+                          {formatRange(
+                            bridge.startDate,
+                            bridge.endDate,
+                            formatters,
+                          )}
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -534,6 +609,8 @@ export default function Calculator() {
                     bridge={bridge}
                     rank={i + 1}
                     isTop={i === 0}
+                    isSelected={selectedBridge?.startDate === bridge.startDate}
+                    onSelect={() => selectBridge(bridge)}
                     t={t}
                     formatters={formatters}
                   />
