@@ -1,6 +1,6 @@
-import { en } from './en';
+import { es } from './es';
 
 // Only one locale for now — this indirection is what lets us add more
-// (e.g. `es`) later without touching call sites.
-export const t = en;
-export type Strings = typeof en;
+// (e.g. `en`) later without touching call sites.
+export const t = es;
+export type Strings = typeof es;

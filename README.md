@@ -31,13 +31,15 @@ Node version is pinned in `.nvmrc` (22). Package manager is pnpm, pinned via the
 - `src/lib/optimizer.ts` — pure TypeScript module with the calendar/bridge-finding logic
 - `src/lib/optimizer.spec.ts` — unit tests for the optimizer (Vitest)
 
-## Algorithm status
+## Algorithm
 
-`buildCalendar()` builds a day-by-day calendar for a given year, tagging each day as `holiday`, `weekend`, or `workday` from the resolved holiday list.
+1. `buildCalendar(year, holidays)` builds a day-by-day calendar for a given year, tagging each day as `holiday`, `weekend`, or `workday` from the resolved holiday list.
+2. `findBridges(calendar, availableDays)` scans the calendar for every maximal run of consecutive workdays no longer than `availableDays`, then expands each run outward over the adjacent holidays/weekends to get the full stretch of time off it buys (`ptoUsed`, `totalDaysOff`, `efficiency = totalDaysOff / ptoUsed`). Candidates are ranked by efficiency descending, then `totalDaysOff` descending.
+3. `combineBridges(candidates, availableDays)` greedily picks non-overlapping candidates in that ranked order, up to the `availableDays` budget — not a perfect knapsack solve, per the MVP spec.
 
-`findBridges()` — the actual gap-detection, efficiency ranking, and greedy multi-gap combination described in the project spec — is **not implemented yet**. It's currently a stub that returns no candidates; this scaffold focused on getting the project tooling (build/lint/test, Husky hooks, CI) working end to end first.
+The `Calculator` island wires this up: a region/year/available-days form drives the calculation, the ranked list shows individual bridges plus the greedy combined plan, and a month-grid calendar highlights holidays, weekends, and the suggested PTO days for the top result.
 
-Holiday data currently ships only a national-holidays starter file for Spain 2026 (`src/lib/holidays/es-2026.json`). Autonomous-community holidays and additional years are not yet included — verify against the official BOE calendar before relying on this data.
+Holiday data (national + all 17 autonomous communities, 2026) lives in `src/lib/holidays/es-<region>-2026.json`, generated from the [`date-holidays`](https://www.npmjs.com/package/date-holidays) npm package rather than typed by hand — cross-checked against several regions (Madrid, Cataluña, País Vasco, Galicia) against known official dates. Still, verify against the official BOE calendar before relying on this data in production. Local/municipal holidays are explicitly out of scope.
 
 ## Git hooks (Husky)
 
