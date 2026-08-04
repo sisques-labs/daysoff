@@ -1,0 +1,57 @@
+{
+  "name": "sisques-labs/daysoff",
+  "version": "0.1.0",
+  "description": "Vacation bridge calculator — find the optimal combination of PTO days to maximize consecutive time off by leveraging public holidays and weekends.",
+  "author": "Sisques Labs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sisques-labs/daysoff.git"
+  },
+  "homepage": "https://github.com/sisques-labs/daysoff",
+  "private": true,
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@11.18.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "format": "prettier --write \"src/**/*.{ts,tsx,astro}\"",
+    "lint": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cov": "vitest run --coverage",
+    "prepare": "node -e \"if(process.env.HUSKY!=='0')require('child_process').execSync('husky',{stdio:'inherit'})\""
+  },
+  "dependencies": {
+    "@astrojs/react": "^6.0.2",
+    "astro": "^7.1.6",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0",
+    "vitest": "^4.1.10"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,astro}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
