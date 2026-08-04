@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { t } from '../lib/i18n';
 import { regions, years, getHolidayCalendar } from '../lib/holidays/registry';
 import { buildCalendar, combineBridges, findBridges } from '../lib/optimizer';
@@ -96,6 +96,57 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
       <span className="h-5 w-1.5 shrink-0 rounded-full bg-amber-400" />
       {children}
     </h2>
+  );
+}
+
+function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-4 w-4"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d={direction === 'left' ? 'm15 6-6 6 6 6' : 'm9 6 6 6-6 6'} />
+    </svg>
+  );
+}
+
+function MonthNav({
+  onPrevious,
+  onNext,
+  disablePrevious,
+  disableNext,
+}: {
+  onPrevious: () => void;
+  onNext: () => void;
+  disablePrevious: boolean;
+  disableNext: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-1">
+      <button
+        type="button"
+        aria-label={t.calendar.previousMonth}
+        onClick={onPrevious}
+        disabled={disablePrevious}
+        className="rounded-lg p-1.5 text-stone-500 transition hover:bg-stone-100 hover:text-stone-800 disabled:opacity-30 disabled:hover:bg-transparent"
+      >
+        <ChevronIcon direction="left" />
+      </button>
+      <button
+        type="button"
+        aria-label={t.calendar.nextMonth}
+        onClick={onNext}
+        disabled={disableNext}
+        className="rounded-lg p-1.5 text-stone-500 transition hover:bg-stone-100 hover:text-stone-800 disabled:opacity-30 disabled:hover:bg-transparent"
+      >
+        <ChevronIcon direction="right" />
+      </button>
+    </div>
   );
 }
 
@@ -221,21 +272,15 @@ export default function Calculator() {
     return dates;
   }, [calendar, topResult]);
 
-  const topMonths = useMemo(() => {
-    if (!topResult) return [];
-    const start = parseDate(topResult.startDate);
-    const end = parseDate(topResult.endDate);
-    const months: { year: number; month: number }[] = [
-      { year: start.getUTCFullYear(), month: start.getUTCMonth() },
-    ];
-    if (
-      start.getUTCMonth() !== end.getUTCMonth() ||
-      start.getUTCFullYear() !== end.getUTCFullYear()
-    ) {
-      months.push({ year: end.getUTCFullYear(), month: end.getUTCMonth() });
-    }
-    return months;
-  }, [topResult]);
+  const [viewMonth, setViewMonth] = useState(() => new Date().getUTCMonth());
+  const topStartDate = topResult?.startDate;
+
+  // Jump the calendar to the top recommendation whenever it changes, but
+  // leave it alone otherwise so browsing with the arrows isn't reset on
+  // every render.
+  useEffect(() => {
+    if (topStartDate) setViewMonth(parseDate(topStartDate).getUTCMonth());
+  }, [topStartDate]);
 
   return (
     <div className="space-y-10">
@@ -293,31 +338,32 @@ export default function Calculator() {
         </div>
       </section>
 
-      <div
-        className={`grid gap-8 ${topResult ? 'lg:grid-cols-2 lg:items-start' : ''}`}
-      >
-        {topResult && (
-          <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm lg:sticky lg:top-6">
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
+        <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm lg:sticky lg:top-6">
+          <div className="flex items-center justify-between gap-2">
             <SectionHeading>{t.calendar.heading}</SectionHeading>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {topMonths.map(({ year: y, month }) => (
-                <MonthGrid
-                  key={`${y}-${month}`}
-                  year={y}
-                  month={month}
-                  calendarByDate={calendarByDate}
-                  ptoDates={ptoDates}
-                />
-              ))}
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <LegendItem type="holiday" label={t.calendar.legend.holiday} />
-              <LegendItem type="weekend" label={t.calendar.legend.weekend} />
-              <LegendItem type="pto" label={t.calendar.legend.pto} />
-              <LegendItem type="workday" label={t.calendar.legend.workday} />
-            </div>
-          </section>
-        )}
+            <MonthNav
+              onPrevious={() => setViewMonth((m) => Math.max(0, m - 1))}
+              onNext={() => setViewMonth((m) => Math.min(11, m + 1))}
+              disablePrevious={viewMonth === 0}
+              disableNext={viewMonth === 11}
+            />
+          </div>
+          <div className="mt-4">
+            <MonthGrid
+              year={year}
+              month={viewMonth}
+              calendarByDate={calendarByDate}
+              ptoDates={ptoDates}
+            />
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <LegendItem type="holiday" label={t.calendar.legend.holiday} />
+            <LegendItem type="weekend" label={t.calendar.legend.weekend} />
+            <LegendItem type="pto" label={t.calendar.legend.pto} />
+            <LegendItem type="workday" label={t.calendar.legend.workday} />
+          </div>
+        </section>
 
         <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
           <SectionHeading>{t.results.heading}</SectionHeading>

@@ -26,7 +26,9 @@ export const es = {
   },
 
   calendar: {
-    heading: 'Calendario del mejor resultado',
+    heading: 'Calendario',
+    previousMonth: 'Mes anterior',
+    nextMonth: 'Mes siguiente',
     legend: {
       holiday: 'Festivo',
       weekend: 'Fin de semana',
