@@ -1,5 +1,6 @@
 ---
 import Calculator from '../components/Calculator';
+import { t } from '../lib/i18n';
 import '../styles/global.css';
 ---
 
@@ -7,15 +8,12 @@ import '../styles/global.css';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>daysoff — vacation bridge calculator</title>
+    <title>{t.siteTitle}</title>
   </head>
   <body class="min-h-screen bg-white text-slate-900">
     <main class="mx-auto max-w-2xl px-4 py-10">
-      <h1 class="text-2xl font-bold">daysoff</h1>
-      <p class="mt-2 text-slate-600">
-        Find the optimal combination of PTO days to maximize consecutive time
-        off.
-      </p>
+      <h1 class="text-2xl font-bold">{t.heading}</h1>
+      <p class="mt-2 text-slate-600">{t.tagline}</p>
       <div class="mt-8">
         <Calculator client:load />
       </div>

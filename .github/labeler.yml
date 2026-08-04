@@ -7,8 +7,8 @@ documentation:
 tests:
   - changed-files:
       - any-glob-to-any-file:
-          - "**/*.test.ts"
-          - "**/*.test.tsx"
+          - "**/*.spec.ts"
+          - "**/*.spec.tsx"
 
 ci:
   - changed-files:

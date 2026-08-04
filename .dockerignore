@@ -18,6 +18,6 @@ coverage
 .env.*
 !.env.example
 
-**/*.test.ts
+**/*.spec.ts
 
 *.md

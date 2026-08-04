@@ -20,6 +20,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,astro}\"",
     "lint": "eslint . --fix",
     "test": "vitest run",
+    "test:changed": "vitest run --changed",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "prepare": "node -e \"if(process.env.HUSKY!=='0')require('child_process').execSync('husky',{stdio:'inherit'})\""

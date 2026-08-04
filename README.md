@@ -29,7 +29,7 @@ Node version is pinned in `.nvmrc` (22). Package manager is pnpm, pinned via the
 - `src/components/Calculator.tsx` — the interactive React island (`client:load`)
 - `src/lib/holidays/` — static JSON holiday data, one file per country/region/year
 - `src/lib/optimizer.ts` — pure TypeScript module with the calendar/bridge-finding logic
-- `src/lib/optimizer.test.ts` — unit tests for the optimizer (Vitest)
+- `src/lib/optimizer.spec.ts` — unit tests for the optimizer (Vitest)
 
 ## Algorithm status
 
@@ -42,7 +42,7 @@ Holiday data currently ships only a national-holidays starter file for Spain 202
 ## Git hooks (Husky)
 
 - `pre-commit` runs `lint-staged` (Prettier + ESLint `--fix` on staged `.ts`/`.tsx`/`.astro` files).
-- `pre-push` runs `pnpm build && pnpm test`.
+- `pre-push` runs `pnpm build && pnpm test:changed`.
 
 Hooks are installed automatically via the `prepare` script on `pnpm install`. Set `HUSKY=0` to skip hook installation (e.g. in CI).
 
