@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: 'https://sisques-labs.github.io',
+  base: '/daysoff',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

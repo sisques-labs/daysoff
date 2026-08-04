@@ -64,6 +64,12 @@ docker build -t daysoff .
 docker run -p 8080:8080 daysoff
 ```
 
+## Deploy (GitHub Pages)
+
+`.github/workflows/pages.yml` builds and deploys the site to GitHub Pages on every push to `main` (only `main` — `develop`/`staging` don't deploy). It publishes to `https://sisques-labs.github.io/daysoff/`, which is why `astro.config.mjs` sets `site`/`base` to that project-pages subpath — changing the deploy target (e.g. a custom domain) means updating those too.
+
+This workflow needs GitHub Pages enabled once, manually, in the repo: **Settings → Pages → Build and deployment → Source: "GitHub Actions"**. There's no API available in this session to do that step — the workflow will fail until it's set.
+
 ## Releases
 
 `.github/workflows/release-train.yml` runs on every push to `develop`, `staging`, and `main`. It detects integrated conventional-commit changes, bumps the version, builds and publishes the Docker image (`sisqueslabs/daysoff` on Docker Hub, `ghcr.io/sisques-labs/daysoff` on GHCR), and generates `CHANGELOG.md`/GitHub Releases via [`cliff.toml`](cliff.toml). `develop` and `staging` publish alpha/beta pre-releases; `main` publishes stable releases and syncs back into `develop`.
