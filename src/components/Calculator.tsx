@@ -155,11 +155,13 @@ function MonthGrid({
   month,
   calendarByDate,
   ptoDates,
+  todayStr,
 }: {
   year: number;
   month: number;
   calendarByDate: Map<string, CalendarDay>;
   ptoDates: Set<string>;
+  todayStr: string;
 }) {
   const cells = buildMonthGrid(year, month);
   const label = monthFormatter.format(new Date(Date.UTC(year, month, 1)));
@@ -181,10 +183,11 @@ function MonthGrid({
           const day = calendarByDate.get(cell.date);
           const type =
             day && ptoDates.has(cell.date) ? 'pto' : (day?.type ?? 'workday');
+          const isPast = cell.date < todayStr;
           return (
             <div
               key={cell.date}
-              className={`rounded-lg py-2 ${dayClass(type)}`}
+              className={`rounded-lg py-2 ${dayClass(type)} ${isPast ? 'opacity-40' : ''}`}
             >
               {Number(cell.date.slice(-2))}
             </div>
@@ -247,9 +250,16 @@ export default function Calculator() {
     () => new Map(calendar.map((day) => [day.date, day])),
     [calendar],
   );
+  // Past days are gone — there's no point suggesting PTO for a bridge
+  // that's already over, so bridges are only ever found from today on.
+  const todayStr = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  const upcomingCalendar = useMemo(
+    () => calendar.filter((day) => day.date >= todayStr),
+    [calendar, todayStr],
+  );
   const candidates = useMemo(
-    () => findBridges(calendar, availableDays),
-    [calendar, availableDays],
+    () => findBridges(upcomingCalendar, availableDays),
+    [upcomingCalendar, availableDays],
   );
   const combinedPlan = useMemo(
     () => combineBridges(candidates, availableDays),
@@ -355,6 +365,7 @@ export default function Calculator() {
               month={viewMonth}
               calendarByDate={calendarByDate}
               ptoDates={ptoDates}
+              todayStr={todayStr}
             />
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
