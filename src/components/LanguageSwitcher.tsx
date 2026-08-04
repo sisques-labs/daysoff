@@ -18,7 +18,7 @@ export default function LanguageSwitcher({
     <div
       role="group"
       aria-label={label}
-      className="flex shrink-0 items-center rounded-full border border-stone-200 bg-white p-0.5 text-xs font-semibold dark:border-stone-700 dark:bg-stone-900"
+      className="flex h-9 shrink-0 items-center gap-0.5 rounded-full border border-stone-200 bg-white px-1 text-xs font-semibold dark:border-stone-700 dark:bg-stone-900"
     >
       {options.map((option) => (
         <button

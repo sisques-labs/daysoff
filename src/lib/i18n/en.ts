@@ -2,7 +2,7 @@ import type { Strings } from './es';
 
 export const en: Strings = {
   siteTitle: 'daysoff — vacation bridge calculator',
-  heading: 'daysoff',
+  heading: 'DaysOff',
   tagline:
     'Find the optimal combination of PTO days to maximize your consecutive time off.',
 
