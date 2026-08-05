@@ -1,7 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.1] - 2026-08-04
+
+### Chore
+- **deps:** Update node.js to v24 (aaa3918)
+- **deps:** Update actions/upload-pages-artifact action to v5 (5a8ad47)
+- **deps:** Update actions/deploy-pages action to v5 (f03f270)
+- **deps:** Update actions/configure-pages action to v6 (3003ffb)
 ## [0.3.0] - 2026-08-04
+
+### Chore
+- **deps:** Update nginxinc/nginx-unprivileged docker tag to v1.31 (#8) (9814cae)
+- **deps:** Update pnpm to v11.20.0 (#9) (a4afb81)
+- **deps:** Lock file maintenance (#15) (dc22961)
 
 ### Features
 - Highlight calendar when selecting a bridge from the results list (e6a5cf0)
