@@ -1,6 +1,6 @@
 {
   "name": "sisqueslabs/daysoff",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Vacation bridge calculator — find the optimal combination of PTO days to maximize consecutive time off by leveraging public holidays and weekends.",
   "author": "Sisques Labs",
   "repository": {
@@ -10,7 +10,7 @@
   "homepage": "https://github.com/sisques-labs/daysoff",
   "private": true,
   "license": "UNLICENSED",
-  "packageManager": "pnpm@11.20.0",
+  "packageManager": "pnpm@11.21.0",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -32,7 +32,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "0.9.10",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
