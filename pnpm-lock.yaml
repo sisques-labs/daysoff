@@ -52,7 +52,7 @@ importers:
         specifier: 17.3.0
         version: 17.3.0
       prettier:
-        specifier: ^3.9.6
+        specifier: 3.9.6
         version: 3.9.6
       prettier-plugin-astro:
         specifier: ^0.14.1
