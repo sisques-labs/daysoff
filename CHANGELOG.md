@@ -1,6 +1,31 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.4] - 2026-08-19
+
+### Bug Fixes
+- **deps:** Pin dependency react-dom to 19.2.8 (fdf1d80)
+- **deps:** Pin dependency react to 19.2.8 (c48e31b)
+- **deps:** Pin dependency astro to 7.2.0 (d04b070)
+- **deps:** Pin dependency @astrojs/react to 6.0.2 (8dd1e4b)
+
+### Chore
+- **deps:** Pin dependency @eslint/js to 10.0.1 (8908174)
+- **deps:** Pin dependency @tailwindcss/vite to 4.3.3 (12f179c)
+- **deps:** Pin dependency eslint-config-prettier to 10.1.8 (1f21048)
+- **deps:** Pin dependency eslint to 10.8.1 (3177035)
+- **deps:** Pin dependency eslint-plugin-astro to 3.1.0 (baad235)
+- **deps:** Pin dependency husky to 9.1.7 (#44) (da0546e)
+- **deps:** Pin dependency lint-staged to 17.3.0 (b4e3c2c)
+- **deps:** Update pnpm to v11.22.0 (ca2d1d4)
+- **deps:** Pin dependency prettier to 3.9.6 (d0d0583)
+- **deps:** Pin dependency prettier-plugin-astro to 0.14.1 (bfcd197)
+- **deps:** Pin dependency tailwindcss to 4.3.3 (#48) (24cac01)
+- **deps:** Pin dependency typescript to 6.0.3 (#49) (50b80f2)
+- **deps:** Pin dependency typescript-eslint to v8.66.0 (#50) (7d93751)
+- **deps:** Pin dependency vitest to 4.1.10 (#51) (905b22b)
+- **deps:** Pin node.js to v24.19.0 (fa89777)
+- **deps:** Lock file maintenance (11013a3)
 ## [0.3.3] - 2026-08-10
 
 ### Chore
