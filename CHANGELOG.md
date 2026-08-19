@@ -1,6 +1,17 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.3] - 2026-08-10
+
+### Chore
+- **deps:** Update dependency eslint to v10.8.1 (#25) (29cdbfe)
+- **deps:** Lock file maintenance (#28) (38d4f54)
+- **deps:** Update pnpm to v11.21.0 (510d996)
+- **deps:** Pin actions/checkout action to v7.0.1 (f30986e)
+- **deps:** Pin actions/configure-pages action to v6.0.0 (93c100b)
+- **deps:** Pin actions/deploy-pages action to v5.0.0 (13cdbb8)
+- **deps:** Pin actions/upload-pages-artifact action to v5.0.0 (bfc1e31)
+- **deps:** Pin dependency @astrojs/check to 0.9.10 (2539be9)
 ## [0.3.1] - 2026-08-04
 
 ### Chore
