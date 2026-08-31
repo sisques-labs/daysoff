@@ -1,6 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.6] - 2026-08-31
+
+### Bug Fixes
+- **deps:** Update dependency astro to v7.2.9 (#73) (46048f7)
+
+### Chore
+- **deps:** Update dependency @types/react-dom to v19.2.5 (#71) (3ed1fa4)
+- **deps:** Update dependency eslint to v10.9.1 (#72) (96d84ef)
+- **deps:** Update dependency lint-staged to v17.4.1 (#74) (3106e40)
+- **deps:** Update dependency typescript-eslint to v8.68.0 (#75) (e8b5675)
+- **deps:** Update node.js to v24.20.0 (#76) (e4d4af9)
+- **deps:** Update pnpm to v11.24.0 (c7e448a)
+- **deps:** Lock file maintenance (8ab3013)
 ## [0.3.5] - 2026-08-25
 
 ### Bug Fixes
