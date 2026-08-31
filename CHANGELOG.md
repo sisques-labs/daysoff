@@ -1,6 +1,17 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.5] - 2026-08-25
+
+### Bug Fixes
+- **deps:** Update dependency @astrojs/react to v6.0.4 (#63) (f7c0152)
+- **deps:** Update dependency astro to v7.2.4 (#64) (504fd46)
+
+### Chore
+- **deps:** Update dependency vitest to v4.1.11 (#62) (31587c0)
+- **deps:** Update dependency eslint to v10.9.0 (#65) (81e6d0d)
+- **deps:** Update dependency typescript-eslint to v8.67.0 (#66) (03969a3)
+- **deps:** Lock file maintenance (#67) (c95b6cc)
 ## [0.3.4] - 2026-08-19
 
 ### Bug Fixes
