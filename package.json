@@ -10,7 +10,7 @@
   "homepage": "https://github.com/sisques-labs/daysoff",
   "private": true,
   "license": "UNLICENSED",
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@11.24.0",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@astrojs/react": "6.0.4",
-    "astro": "7.2.4",
+    "astro": "7.2.9",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -36,17 +36,17 @@
     "@eslint/js": "10.0.1",
     "@tailwindcss/vite": "4.3.3",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4",
-    "eslint": "10.9.0",
+    "@types/react-dom": "19.2.5",
+    "eslint": "10.9.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "3.1.0",
     "husky": "9.1.7",
-    "lint-staged": "17.3.0",
+    "lint-staged": "17.4.1",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.67.0",
+    "typescript-eslint": "8.68.0",
     "vitest": "4.1.11"
   },
   "lint-staged": {
