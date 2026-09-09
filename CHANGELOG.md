@@ -1,6 +1,21 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.7] - 2026-09-09
+
+### Bug Fixes
+- **deps:** Update dependency @astrojs/react to v6.0.5 (#84) (defd2cf)
+- **deps:** Update dependency astro to v7.3.1 (#89) (ef8960a)
+
+### Chore
+- **deps:** Update actions/deploy-pages action to v5.0.1 (#82) (c172fb3)
+- **deps:** Update dependency @types/react-dom to v19.2.7 (#83) (9548a9d)
+- **deps:** Update dependency eslint to v10.10.0 (#85) (6ebc744)
+- **deps:** Update dependency lint-staged to v17.5.0 (#86) (ce03efc)
+- **deps:** Update dependency typescript-eslint to v8.69.0 (#87) (5441bff)
+- **deps:** Update pnpm to v11.26.0 (#88) (8568537)
+- **deps:** Update pnpm to v12 (57937c9)
+- **deps:** Update dependency vitest to v5 (024a891)
 ## [0.3.6] - 2026-08-31
 
 ### Bug Fixes
@@ -64,16 +79,14 @@ All notable changes to this project will be documented in this file.
 ## [0.3.1] - 2026-08-04
 
 ### Chore
+- **deps:** Update nginxinc/nginx-unprivileged docker tag to v1.31 (#8) (9814cae)
+- **deps:** Update pnpm to v11.20.0 (#9) (a4afb81)
+- **deps:** Lock file maintenance (#15) (dc22961)
 - **deps:** Update node.js to v24 (aaa3918)
 - **deps:** Update actions/upload-pages-artifact action to v5 (5a8ad47)
 - **deps:** Update actions/deploy-pages action to v5 (f03f270)
 - **deps:** Update actions/configure-pages action to v6 (3003ffb)
 ## [0.3.0] - 2026-08-04
-
-### Chore
-- **deps:** Update nginxinc/nginx-unprivileged docker tag to v1.31 (#8) (9814cae)
-- **deps:** Update pnpm to v11.20.0 (#9) (a4afb81)
-- **deps:** Lock file maintenance (#15) (dc22961)
 
 ### Features
 - Highlight calendar when selecting a bridge from the results list (e6a5cf0)
