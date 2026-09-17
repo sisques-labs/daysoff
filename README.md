@@ -51,7 +51,7 @@ Hooks are installed automatically via the `prepare` script on `pnpm install`. Se
 ## CI
 
 - `.github/workflows/ci.yml` — lint, test, and build on every pull request via the shared [`sisques-labs/workflows`](https://github.com/sisques-labs/workflows) `node-ci.yml` reusable workflow.
-- `.github/workflows/codeql.yml` — CodeQL analysis on push to `develop`/`staging`/`main`, on pull requests, and weekly.
+- `.github/workflows/codeql.yml` — CodeQL analysis on push to `main`, on pull requests, and weekly.
 - `.github/workflows/docker.yml` — Docker smoke build (multi-arch, no push) plus a blocking Trivy scan on every pull request.
 - `.github/workflows/pr-labeler.yml` — labels pull requests by changed files, per `.github/labeler.yml`.
 
@@ -72,4 +72,4 @@ This workflow needs GitHub Pages enabled once, manually, in the repo: **Settings
 
 ## Releases
 
-`.github/workflows/release-train.yml` runs on every push to `develop`, `staging`, and `main`. It detects integrated conventional-commit changes, bumps the version, builds and publishes the Docker image (`sisqueslabs/daysoff` on Docker Hub, `ghcr.io/sisques-labs/daysoff` on GHCR), and generates `CHANGELOG.md`/GitHub Releases via [`cliff.toml`](cliff.toml). `develop` and `staging` publish alpha/beta pre-releases; `main` publishes stable releases and syncs back into `develop`.
+This repo is trunk-based: `main` is the only long-lived branch. `.github/workflows/trunk-ci-cd.yml` runs on every push to `main`, building and publishing a commit-addressed image (`:sha-<shortsha>`, `:edge` — no version bump). `.github/workflows/release.yml` is a separate, manual `workflow_dispatch` step that promotes an already-published digest to a versioned stable release (`sisqueslabs/daysoff` on Docker Hub, `ghcr.io/sisques-labs/daysoff` on GHCR) and generates `CHANGELOG.md`/GitHub Releases via [`cliff.toml`](cliff.toml) — version and source digest are both computed automatically, so it needs no inputs. `.github/workflows/image-cleanup.yml` deletes old `:sha-*` tags on a weekly schedule. See [`sisques-labs/workflows`](https://github.com/sisques-labs/workflows)' README for the full model.
