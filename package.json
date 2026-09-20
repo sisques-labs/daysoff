@@ -10,7 +10,7 @@
   "homepage": "https://github.com/sisques-labs/daysoff",
   "private": true,
   "license": "UNLICENSED",
-  "packageManager": "pnpm@12.4.2",
+  "packageManager": "pnpm@12.5.1",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
